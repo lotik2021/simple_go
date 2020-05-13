@@ -1,0 +1,10 @@
+bin/
+src/github.com/
+src/golang.org/
+.idea/
+.vscode
+.DS_Store
+./maasapi
+./maasapi.exe
+./dialogs/*.json
+./scripts/*.sql

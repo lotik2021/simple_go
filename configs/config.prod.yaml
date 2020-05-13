@@ -1,0 +1,40 @@
+loglevel: "debug"
+database:
+  url: "postgres://postgres:maas-prod@192.168.119.66:5432/maas-prod?sslmode=disable"
+etcd:
+  basePath: "/maasapi/prod"
+google:
+  apiKey: "AIzaSyBbJshJTk5lzl3lQvEXR3X-zktTo8KkMxc"
+auth:
+  credentials:
+    clientSecret: "MetaSearch.GUI.1qA2wS3eD"
+  core:
+    baseURL: "https://auth.movista.ru"
+  account:
+    baseURL: "https://auth-reg.movista.ru"
+webTmp:
+  baseURL: "https://movista.ru"
+  urls:
+    orderevent: "/order/ticket-exchange?eventId="
+web:
+  baseURL: "https://movista.ru"
+places:
+  baseURL: "https://places.datapro.movista.ru"
+dialog:
+  baseURL: "https://maas-dialog.datapro.movista.ru"
+fapiadapter:
+  baseURL: "https://fapiadapter.datapro.movista.ru"
+personalarea:
+  baseURL: "https://personalarea.datapro.movista.ru"
+content:
+  baseURL: "https://strapi.datapro.movista.ru"
+notification:
+  baseURL: "http://notify.movista.ru"
+payment:
+  baseURL: "https://payment.movista.ru"
+  processing: "https://movista.ru/order/processing"
+search:
+  baseURL: "https://search.datapro.movista.ru"
+allowOrigins:
+  - "https://movista.ru"
+  - "https://m.movista.ru"

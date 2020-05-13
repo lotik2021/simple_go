@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: etcd-keeper
+  namespace: default
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: etcd-keeper
+  template:
+    metadata:
+      labels:
+        app: etcd-keeper
+    spec:
+      imagePullSecrets:
+        - name: "registry"
+      containers:
+        - name: etcd-keeper
+          image: registry.devops.movista.ru/etcdkeeper:latest
+          imagePullPolicy: Always
+          env:
+            - name: HOST
+              value: "0.0.0.0"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 5
+            tcpSocket:
+              port: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: etcd-keeper
+  namespace: default
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: etcd-keeper
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: etcd-keeper
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/whitelist-source-range: 10.0.0.0/16,192.168.0.0/16,46.61.178.246/32,188.170.23.33/32
+spec:
+  rules:
+    - host: etcd-keeper.svc.movista.ru
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: etcd-keeper
+              servicePort: http
+  tls:
+    - secretName: etcd-keeper-prod-tls
+      hosts:
+        - etcd-keeper.svc.movista.ru

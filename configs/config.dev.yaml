@@ -1,0 +1,22 @@
+loglevel: "info"
+recaptcha:
+  enabled: false
+database:
+  url: "postgres://postgres:maas@192.168.119.90:5432/maas-dev?sslmode=disable"
+google:
+  apiKey: "AIzaSyBbJshJTk5lzl3lQvEXR3X-zktTo8KkMxc"
+auth:
+  core:
+    baseURL: "https://auth-dev.svc.movista.ru"
+  account:
+    baseURL: "https://auth-reg-dev.svc.movista.ru"
+web:
+  baseURL: "https://web-dev.svc.movista.ru"
+places:
+  baseURL: "https://places-dev.svc.movista.ru"
+dialog:
+  baseURL: "https://maas-dialog-dev.svc.movista.ru"
+fapiadapter:
+  baseURL: "https://fapiadapter-dev.svc.movista.ru"
+booking:
+  baseURL: "https://booking-dev.svc.movista.ru"

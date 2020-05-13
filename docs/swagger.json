@@ -1,0 +1,462 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "{{.Description}}",
+        "title": "maasapi",
+        "contact": {},
+        "license": {},
+        "version": "{{.Version}}"
+    },
+    "host": "{{.Host}}",
+    "basePath": "{{.BasePath}}",
+    "paths": {
+        "/api/auth/authorize": {
+            "post": {
+                "description": "authorize",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "authAuthorize",
+                "operationId": "authorize",
+                "parameters": [
+                    {
+                        "description": "Device",
+                        "name": "req",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/AuthorizeReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/user.AuthorizeAndCompleteRegistrationUsecaseResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/create": {
+            "post": {
+                "description": "create temporary user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "authCreateTemporaryUser",
+                "operationId": "create-temporary-user",
+                "parameters": [
+                    {
+                        "description": "Device",
+                        "name": "req",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/CreateTemporaryUserReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/CreateTemporaryUserRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/sendSms": {
+            "post": {
+                "description": "send sms code\nDemo user phone is +70001112233",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "authSendSmsCode",
+                "operationId": "send-sms-code",
+                "parameters": [
+                    {
+                        "description": "Device",
+                        "name": "req",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/SendSmsCodeReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/SendSmsCodeRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dialogs/dialog": {
+            "post": {
+                "description": "Dialog",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "dialog"
+                ],
+                "summary": "Dialog",
+                "operationId": "dialog",
+                "parameters": [
+                    {
+                        "description": "Dialog",
+                        "name": "req",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dialog.Request"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dialog.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/places/autosuggestions": {
+            "get": {
+                "description": "return recent and popular places",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "web"
+                ],
+                "summary": "webPlacesAutoSuggestions",
+                "operationId": "web-places-auto-suggestions",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "user_id to get recent, if empty - recent is []",
+                        "name": "AS-CID",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "from",
+                            "to"
+                        ],
+                        "type": "string",
+                        "description": "direction",
+                        "name": "direction",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 5,
+                        "description": "recent count in response",
+                        "name": "recentCount",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 5,
+                        "description": "popular count in response",
+                        "name": "popularCount",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/router.WebPlacesAutoSuggestionsRes"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "common.DataObject": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "object_id": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "common.GeoPoint": {
+            "type": "object",
+            "properties": {
+                "latitude": {
+                    "type": "number"
+                },
+                "longitude": {
+                    "type": "number"
+                }
+            }
+        },
+        "dialog.Action": {
+            "type": "object",
+            "properties": {
+                "action_id": {
+                    "type": "string"
+                },
+                "handable": {
+                    "type": "boolean"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "dialog.Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "dialog.Meta": {
+            "type": "object",
+            "properties": {
+                "client_id": {
+                    "type": "string"
+                },
+                "locale": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "object",
+                    "$ref": "#/definitions/common.GeoPoint"
+                },
+                "time_zone": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string",
+                    "example": "009dew4enew1711123"
+                }
+            }
+        },
+        "dialog.Request": {
+            "type": "object",
+            "properties": {
+                "action_id": {
+                    "type": "string",
+                    "example": "yes"
+                },
+                "client_entities": {
+                    "type": "object"
+                },
+                "meta": {
+                    "type": "object",
+                    "$ref": "#/definitions/dialog.Meta"
+                },
+                "session": {
+                    "type": "object",
+                    "$ref": "#/definitions/dialog.Session"
+                },
+                "user_response": {
+                    "type": "string",
+                    "example": "Москва"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "dialog.Response": {
+            "type": "object",
+            "properties": {
+                "actions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dialog.Action"
+                    }
+                },
+                "error": {
+                    "type": "object",
+                    "$ref": "#/definitions/dialog.Error"
+                },
+                "extras": {
+                    "type": "object"
+                },
+                "hint": {
+                    "type": "string"
+                },
+                "objects": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/common.DataObject"
+                    }
+                },
+                "session": {
+                    "type": "object",
+                    "$ref": "#/definitions/dialog.Session"
+                }
+            }
+        },
+        "dialog.Session": {
+            "type": "object",
+            "properties": {
+                "message_date_time": {
+                    "type": "string",
+                    "example": "2019-08-08T14:15:22+03:00"
+                },
+                "message_id": {
+                    "type": "integer"
+                },
+                "session_id": {
+                    "type": "string",
+                    "example": "a6e6f1c8-5f61-43c8-b9ee-f1dd176108cf"
+                }
+            }
+        },
+        "places.Place": {
+            "type": "object",
+            "properties": {
+                "cityName": {
+                    "type": "string"
+                },
+                "countryName": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "fullName": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "lat": {
+                    "type": "number"
+                },
+                "lon": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nearestBiggerPlaceId": {
+                    "type": "integer"
+                },
+                "placeclassId": {
+                    "type": "integer"
+                },
+                "platformName": {
+                    "type": "string"
+                },
+                "stateName": {
+                    "type": "string"
+                },
+                "stationName": {
+                    "type": "string"
+                },
+                "timeZone": {
+                    "type": "string"
+                },
+                "typePlace": {
+                    "type": "integer"
+                }
+            }
+        },
+        "router.WebPlacesAutoSuggestionsRes": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "popular": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/places.Place"
+                            }
+                        },
+                        "recent": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/places.Place"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "user.AuthorizeAndCompleteRegistrationUsecaseResponse": {
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "expires_in": {
+                    "type": "integer"
+                },
+                "has_email": {
+                    "type": "boolean"
+                },
+                "refresh_token": {
+                    "type": "string"
+                },
+                "request_id": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

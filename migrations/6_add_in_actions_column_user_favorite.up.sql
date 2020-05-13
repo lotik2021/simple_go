@@ -1,0 +1,1 @@
+ALTER TABLE maasapi.user_favorite ADD COLUMN in_actions boolean default false;

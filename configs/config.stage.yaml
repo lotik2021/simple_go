@@ -1,0 +1,38 @@
+loglevel: "info"
+database:
+  url: "postgres://postgres:maas@192.168.119.90:5432/maas-stage?sslmode=disable"
+etcd:
+  basePath: "/maasapi/stage"
+auth:
+  credentials:
+    clientSecret: "MetaSearch.GUI.1qA2wS3eD"
+  core:
+    baseURL: "https://auth-stage.svc.movista.ru"
+  account:
+    baseURL: "https://auth-reg-stage.svc.movista.ru"
+webTmp:
+  baseURL: "https://personalarea.stage-k8s.movista.ru"
+web:
+  baseURL: "https://stage.movista.ru"
+places:
+  baseURL: "https://places-stage.svc.movista.ru"
+dialog:
+  baseURL: "https://maas-dialog-stage.svc.movista.ru"
+fapiadapter:
+  baseURL: "https://fapiadapter-stage.svc.movista.ru"
+booking:
+  baseURL: "https://booking-stage.svc.movista.ru/"
+personalarea:
+  baseURL: "https://personalarea-stage.svc.movista.ru"
+payment:
+  baseURL: "https://payment-stage.svc.movista.ru"
+  processing: "https://stage.movista.ru/order/processing"
+content:
+  baseURL: "https://strapi.dev-k8s.movista.ru"
+notification:
+  baseURL: "http://notify-stage.movista.ru"
+search:
+  baseURL: "https://search.stage-k8s.movista.ru"
+allowOrigins:
+  - "https://stage.movista.ru"
+  - "https://m.stage.movista.ru"

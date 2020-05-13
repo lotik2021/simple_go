@@ -1,0 +1,29 @@
+version: "3.5"
+services:
+  redis:
+    image: redis:5.0.7-alpine
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - 6379:6379
+  redis-ui:
+    image: patrikx3/p3x-redis-ui:2020.4.103
+    ports:
+      - 7843:7843
+    volumes:
+      - $HOME/p3x-redis-ui-settings:/settings
+  postgres:
+    image: mdillon/postgis:10-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: maas
+  dialog:
+    image: registry.devops.movista.ru/maas-dialog-service:release-1-7-1.f31a87d0160.20200211-1223
+    ports:
+      - 5000:5000
+    environment:
+      MAAS: http://$HOSTADDR  # надо прописать export HOSTADDR=192.168.32.109 (ip - адрес машины)
+      SQL_PASSWORD: "maas"
+      SQL_HOST: "192.168.119.90"

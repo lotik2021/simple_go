@@ -1,0 +1,15 @@
+loglevel: "debug"
+recaptcha:
+  enabled: false
+etcd:
+  url: "http://192.168.119.87:32676"
+redis:
+  url: "localhost:6379"
+ratelimit:
+  enabled: true
+database:
+  url: "postgres://postgres:password@localhost:5432/maas?sslmode=disable"
+dialog:
+  baseURL: "http://localhost:5000"
+push:
+  baseURL: "http://localhost:4321"

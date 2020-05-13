@@ -1,0 +1,1 @@
+ALTER TABLE maasapi.device ADD COLUMN IF NOT EXISTS session_count integer NOT NULL DEFAULT 0;

@@ -1,0 +1,48 @@
+{
+  "routes": [
+    {
+      "isReturn": false,
+      "tripIdToServiceId": [
+        {
+          "serviceId": 1,
+          "tripId": 45
+        },
+        {
+          "serviceId": 1,
+          "tripId": 46
+        },
+        {
+          "serviceId": 1,
+          "tripId": 47
+        },
+        {
+          "serviceId": 2,
+          "tripId": 11
+        }
+      ]
+    },
+    {
+      "isReturn": true,
+      "tripIdToServiceId": [
+        {
+          "serviceId": 4,
+          "tripId": 12345
+        },
+        {
+          "serviceId": 1,
+          "tripId": 48
+        },
+        {
+          "serviceId": 1,
+          "tripId": 49
+        },
+        {
+          "serviceId": 1,
+          "tripId": 50
+        }
+      ]
+    }
+  ],
+  "trips_map": {},
+  "services_map": {}
+}

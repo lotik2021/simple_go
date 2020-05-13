@@ -1,0 +1,440 @@
+loglevel: "debug"
+server:
+  url: ":8080"
+etcd:
+  url: "http://etcd-cluster.default:2379"
+  basePath: "/maasapi/dev"
+  paths:
+    promptsPlacesTariffs: "/prompts_places_tariffs"
+    rateLimits: "/rate_limits"
+    blackList: "/blacklist"
+carrotQuestAuthKey: "userauthkey-28283-5980155dba95bcb24054e0c424f8476888926e96f8151e3c30b205e2ab9df0"
+redis:
+  url: "maas-redis-headless:6379"
+requestTimeout: "120s"
+recaptcha:
+  enabled: true
+  baseURL: "https://www.google.com/recaptcha/api/siteverify"
+  secretKeyWeb: "6LekKc8UAAAAAFLmpAcsQMnudenonalKPf-AQ8-Z"
+  secretKeyIos: "6LdMgc8UAAAAAA0nEB-7A0cQwFtpx_2jHW-nvQid"
+  secretKeyAndroid: "6LcioM8UAAAAAOvgWGCuADP5dWeb_wBw8UsprHq3"
+demouser:
+  phone: "+70001112233"
+  code: 445566
+  tokenttl: 1h
+asyncAvailable: true
+seatAutoSelection: true
+database:
+  url: "postgres://postgres:maas@192.168.119.90:5432/maas-dev?sslmode=disable"
+  poolsizemax: 20
+yandexMoney:
+  requestTimeout: "120s"
+  clientID: "1B14763D04CE4586317FFCD34CEA2C08A3DB5B7D95CCC4DD577E3421A4D016BB"
+  urls:
+    strelkaParameters: "https://money.yandex.ru/api/showcase/20651"
+    troikaParameters: "https://money.yandex.ru/api/showcase/10449"
+strelka:
+  requestTimeout: "120s"
+  clientId:
+  apiAvailable: true
+  urls:
+    redirect: "/payment/callback/strelka"
+    defaultRedirect: "https://strelkapay.ru/topup/anon/"
+    pay: "https://strelkapay.ru/api/payments/"
+    types: "https://strelkapay.ru/api/cards/types"
+    balance: "https://strelkapay.ru/api/cards/status"
+troika:
+  requestTimeout: "120s"
+  clientId: "10449"
+  urls:
+    failRedirect: "/payment/callback/troika/failure"
+    successRedirect: "/payment/callback/troika/success"
+    requestInstanceId: "https://money.yandex.ru/api/instance-id"
+    externalPayment: "https://money.yandex.ru/api/request-external-payment"
+    processExternalPayment: "https://money.yandex.ru/api/process-external-payment"
+google:
+  requestTimeout: "120s"
+  apiKey: "AIzaSyBfnJXRZIL0NJxObttlHLRVlmHIF1oebEg"
+taxi:
+  requestTimeout: "120s"
+  citymobile:
+    apiKey: "9c019e418e2ea35b7172bc0cabdcbfe1"
+    deepLink:
+      partnerId: "bf0604753f29359cf505000c4f6f89e9"
+      trackingLinkMoscow: "https://trk.mail.ru/c/v9nmy1?"
+      trackingLinkSamara: "https://trk.mail.ru/c/wbdvs8?"
+      trackingLinkYaroslavl: "https://trk.mail.ru/c/xc2jv4?"
+      trackingLinkTolyatti: "https://trk.mail.ru/c/xpnzp7?"
+      prefix: "citymobil-taxi://ride?"
+    baseURL: "https://city-mobil.ru/taxiserv/api/partner/v2"
+    urls:
+      price: "/calculate_price"
+      auth: "/auth"
+  yandex:
+    clid: "movista"
+    refId: "2357101"
+    apiKey: "3b320e58d9fb4fb2a9bf5a04dde8c8ca"
+    deepLink:
+      prefix: "https://3.redirect.appmetrica.yandex.com/route?"
+      trackingId: "1178268795219780156"
+    baseURL: "https://taxi-routeinfo.taxi.yandex.net"
+    urls:
+      price: "/taxi_info"
+  maxim:
+    token: "GgUBX_-OhSUjadfpHh8hicklVaoanmtq"
+    appCode: "MAXIM"
+    deepLink:
+      trackingLinkIos: "https://itunes.apple.com/app/apple-store/id579985456?pt=119057982&ct=movista&mt=8"
+      trackingLinkAndroid: "https://play.google.com/store/apps/details?id=com.taxsee.taxsee&referrer=utm_source%3Dmovista"
+      refOrgId: "MOVISTA"
+      prefix: "maximzakaz://order?"
+    baseURL: "https://api.taxsee.com/dgis/v2"
+    urls:
+      price: "/calculates"
+openweather:
+  baseURL: "https://api.openweathermap.org/data/2.5"
+  requestTimeout: "120s"
+  apiKey: "b65f3549485b0077b9f03e2009db2e24"
+auth:
+  requestTimeout: "120s"
+  temporarySecret: "MovistaSecretKey"
+  credentials:
+    clientID: "MetaSearch.GUI"
+    clientSecret: "secret"
+    internal:
+      grantType: "client_credentials"
+      scope: "AccountService.FullAccess UApi.Search.FullAccess UApi.Booking.FullAccess UApi.PersonalArea.Profile.FullAccess UApi.Payment.CommonAccess Notification.FullAccess"
+    external:
+      grantType: "client_credentials"
+      scope: "UApi.Search.FullAccess UApi.Booking.FullAccess openid offline_access UApi.PersonalArea.Profile.FullAccess UApi.Payment.CommonAccess Notification.FullAccess"
+    refreshToken:
+      grantType: "refresh_token"
+      scope: "UApi.Search.FullAccess UApi.Booking.FullAccess openid offline_access UApi.PersonalArea.Profile.FullAccess UApi.Payment.CommonAccess Notification.FullAccess"
+  core:
+    baseURL: "https://auth-dev.svc.movista.ru"
+    urls:
+      connectToken: "/connect/token"
+      connectUserInfo: "/connect/userinfo"
+  account:
+    baseURL: "https://auth-reg-dev.svc.movista.ru"
+    urls:
+      devicesRegister: "/api/v1/devices/register"
+      smscode: "/api/v1/account/smscode"
+      authorize: "/api/v1/account/authorize"
+      completeRegistration: "/api/v1/account/completeregistration"
+      getUser: "/api/users/user" # + /{id}
+      confirmEmail: "/api/v1/confirm/email"
+notification:
+  baseURL: "http://notify-dev.movista.ru"
+  provider: SendGrid
+  supportemail: support@movista.ru
+  urls:
+    feedback: "/api/v1/send/emailbyprovider"
+web:
+  baseURL: "https://web-dev.svc.movista.ru"
+content:
+  baseURL: "https://strapi.dev-k8s.movista.ru"
+  urls:
+    queryCms: "/"
+places:
+  requestTimeout: "120s"
+  baseURL: "https://places-dev.svc.movista.ru"
+  urls:
+    searchPlaces: "/api/v1/SearchPlaces"
+    searchPlacesByGeo: "/api/v1/SearchPlaces/ByGeo"
+    searchPlacesByIds: "/api/v1/SearchPlaces/ByIds"
+dialog:
+  requestTimeout: "120s"
+  baseURL: "https://maas-dialog-dev.svc.movista.ru"
+  urls:
+    dialog: "/api/dialogs/dialog"
+personalarea:
+  requestTimeout: "120s"
+  baseURL: "https://personalarea-dev.svc.movista.ru"
+  urls:
+    documentsV2: "/api/v2/customers/documents"
+    documentsDeactivateV2: "/api/v2/customers/documents/deactivate"
+    customersV2: "/api/v2/customers"
+fapiadapter:
+  requestTimeout: "120s"
+  baseURL: "https://fapiadapter-dev.svc.movista.ru"
+  urls:
+    searchAsyncV5: "/api/v5/searchAsync"
+    getSearchStatusV5: "/api/v5/getSearchStatus"
+    getSearchResultsV5: "/api/v5/getSearchResults"
+    getPathGroupV5: "/api/v5/getPathGroup"
+    getSegmentRoutesV5: "/api/v5/getSegmentRoutes"
+    saveSelectedRoutesV5: "/api/v5/saveselectedroutes"
+    saveSelectedRoutesV4: "/api/v4/saveselectedroutes"
+    getSelectedRoutesV5: "/api/v5/getselectedroutes"
+    getSelectedRoutesV4: "/api/v4/getselectedroutes"
+    searchV4: "/api/v4/searchforward"
+    createBookingV4: "/api/v4/createBooking"
+    checkBookingV4: "/api/v4/CheckBooking"
+    getOrderV2: "/api/v2/GetOrder"
+    createOrderV4: "/api/v4/CreateOrder"
+    refundOrderAsyncV2: "/api/v2/routes/refundOrderAsync"
+    addServicesToOrder: "/api/v1/AddServicesToOrder"
+    checkRefund: "/api/v1/CheckRefund"
+    blank: "/api/v1/blank"
+    blanksZip: "/api/v1/blanks/zip"
+    blanksPdf: "/api/v1/blanks/pdf"
+    getOrderByEmail: "/api/v2/GetOrderByEmail"
+push:
+  requestTimeout: "120s"
+  baseURL: "https://maas-push-dev.svc.movista.ru"
+  urls:
+    send: "/api/push/notification/send"
+    carrotQuestEvent: "/api/analytics/carrot-quest/events"
+    carrotQuestProps: "/api/analytics/carrot-quest/props"
+    carrotQuestOrderEvent: "/api/analytics/carrot-quest/orderEvent"
+booking:
+  requestTimeout: "120s"
+  baseURL: "https://booking-dev.svc.movista.ru"
+  urls:
+    getFareRulesV2: "/api/v2/getFareRules"
+    cancelOrderV1: "/api/v1/cancelOrder"
+    getFareRulesV1: "/api/v1/GetFareRules"
+    createBookingV2: "/api/v2/CreateBooking"
+    changeERegistrationV1: "/api/v1/changeeregistration"
+    checkRefundV1: "/api/v1/CheckRefund"
+analytics:
+  urls:
+    google: "http://www.google-analytics.com/collect"
+    google2: "https://google-analytics.bi.owox.com/collect"
+webTmp:
+  baseURL: "http://web-tmp.dev-k8s.movista.ru"
+  urls:
+    orderevent: "/api/v2/orders/events/"
+ipGeo:
+  baseURL: "http://ip-api.com/json"
+search:
+  baseURL: "http://search.dev-k8s.movista.ru"
+  urls:
+    routeDetailsV3: "/api/v3/route/details"
+payment:
+  requestTimeout: "120s"
+  baseURL: "https://payment-dev.svc.movista.ru"
+  processing: "https://web-dev.svc.movista.ru/order/processing"
+  urls:
+    pay: "/api/v1/pay"
+    orderState: "/api/v1/orderState"
+    additionalPay: "/api/v1/AdditionalPay"
+    refundOrderV1: "/api/v1/RefundOrder1"
+    getOrderStateV1: "/api/v1/OrderState"
+allowOrigins:
+  - "*"
+static:
+  aboutCustomer: "https://hb.bizmrg.com/movistatic/aboutCustomer.html"
+icons:
+  travelCards:
+    troika:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/travel-card/troykanotskill.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/travel-card/troyka.svg"
+    strelka:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/travel-card/strelkanotskill.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/travel-card/strelka.svg"
+  taxi:
+    yandex:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/taxi/yandex.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/taxi/yandex.svg"
+    maxim:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/taxi/maxim.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/taxi/maxim.svg"
+    citymobil:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/taxi/citimobil.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/taxi/citimobil.svg"
+  driving:
+    iconUrl:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/driving/car.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/driving/car.svg"
+  trips:
+    avia:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/trips/avia_active.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/trips/avia_active.svg"
+    bus:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/trips/bus.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/trips/bus.svg"
+    train:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/trips/train.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/trips/train.svg"
+  places:
+    airport:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/places/airport.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/places/airport.svg"
+    bus:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/places/bus3.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/places/bus3.svg"
+    city:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/places/city.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/places/city.svg"
+    default:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/places/default.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/places/default.svg"
+    hub:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/places/hub.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/places/hub.svg"
+    home:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/places/home.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/places/home.svg"
+    metro:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/places/metro2.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/places/metro2.svg"
+    train:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/places/train2.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/places/train2.svg"
+    work:
+      ios: "https://hb.bizmrg.com/movistatic/mobile/places/work.png"
+      android: "https://hb.bizmrg.com/movistatic/mobile/Android/places/work.svg"
+    darkTheme:
+      airport:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/places/airport_dark.png"
+        android:
+      bus:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/places/bus_dark.png"
+        android:
+      city:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/places/city_dark.png"
+        android:
+      default:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/places/default_dark.png"
+        android:
+      hub:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/places/hub_dark.png"
+        android:
+      home:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/places/home_dark.png"
+        android:
+      metro:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/places/metro_dark.png"
+        android:
+      train:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/places/train_dark.png"
+        android:
+      work:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/places/work_dark.png"
+        android:
+  genericData:
+    detailsIcons:
+      bus:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/bus.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/bus.svg"
+      ferry:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/ferry.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/ferry.svg"
+      metro:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/metro.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/metro.svg"
+      train:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/train.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/train.svg"
+      tram:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/tram.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/tram.svg"
+      trolleybus:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/trolleybus.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/trolleybus.svg"
+      mcd:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/mcd.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/mcd.svg"
+      aeroexpress:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/aeroexpress.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/aeroexpress.svg"
+    shortIcons:
+      bus:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/short/bus.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/short/bus.svg"
+      shareTaxi:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/short/share_taxi.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/short/share_taxi.svg"
+      train:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/short/Group%20262.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/short/Group%20264.svg"
+      tram:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/short/tram.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/short/tram.svg"
+      trolleybus:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/short/trolleybus.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/short/trolleybus.svg"
+      commuterTrain:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/short/commuter_train.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/short/commuter_train.svg"
+      mcdD1:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/short/D1.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/short/D1.svg"
+      mcdD2:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/short/D2.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/short/D2.svg"
+      aeroexpress:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/short/aeroexpress.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/short/aeroexpress.svg"
+      ferry:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/generic-data/short/ferry.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/generic-data/short/ferry.svg"
+      metroDefault:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/maas-transport/metro_default.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/maas-transport/metro_default.svg"
+  weather:
+    clearSky:
+      day:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/ClearSkyDay.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/ClearSkyDay.svg"
+      night:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/ClearSkyNight.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/ClearSkyNight.svg"
+    fewClouds:
+      day:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/FewCloudsDay.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/FewCloudsDay.svg"
+      night:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/FewCloudsNight.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/FewCloudsNight.svg"
+    scatteredClouds:
+      day:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/ScatteredCloudsDay.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/ScatteredCloudsDay.svg"
+      night:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/ScatteredCloudsNight.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/ScatteredCloudsNight.svg"
+    brokenClouds:
+      day:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/BrokenCloudsDay.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/BrokenCloudsDay.svg"
+      night:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/BrokenCloudsNight.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/BrokenCloudsNight.svg"
+    showerRain:
+      day:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/ShowerRainDay.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/ShowerRainDay.svg"
+      night:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/ShowerRainNight.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/ShowerRainNight.svg"
+    rain:
+      day:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/RainDay.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/RainDay.svg"
+      night:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/RainNight.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/RainNight.svg"
+    thunderStorm:
+      day:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/ThunderstormDay.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/ThunderstormDay.svg"
+      night:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/ThunderstormNight.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/ThunderstormNight.svg"
+    snow:
+      day:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/SnowDay.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/SnowDay.svg"
+      night:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/SnowNight.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/SnowDayNight.svg"
+    mist:
+      day:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/MistDay.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/MistDay.svg"
+      night:
+        ios: "https://hb.bizmrg.com/movistatic/mobile/weather/MistNight.png"
+        android: "https://hb.bizmrg.com/movistatic/mobile/Android/weather/MistDayNight.svg"
